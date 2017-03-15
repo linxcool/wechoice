@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+// support for butterknife (next see dependencies in this file)
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.linxcool.wechoice"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+
+    // andbase required
+    compile 'com.github.linxcool:andbase:1.0.4'
+
+    // butterknife required
+    compile('com.jakewharton:butterknife:8.5.1', {
+        // the next 2 line fix error for import appcompat-v7
+        exclude module: 'support-v4'
+        exclude group : 'com.android.support'
+    })
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    // glide required(dependence support-v4)
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    // test module required
+    testCompile 'junit:junit:4.12'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+}
