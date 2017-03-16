@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="tab_bg">#F6F6F6</color>
+    <color name="tab_bg_top_line">@color/split_gray</color>
+    <color name="tab_text_default">@color/gray</color>
+    <color name="tab_text_selected">@color/blue</color>
+
+    <color name="gray">#AAAAAA</color>
+    <color name="blue">#004CF2</color>
+    <color name="split_gray">#AAA</color>
 </resources>

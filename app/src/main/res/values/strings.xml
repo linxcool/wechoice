@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">wechoice</string>
     <string name="action_settings">Settings</string>
+
+    <string name="tab0">首页</string>
+    <string name="tab1">美女</string>
+    <string name="tab2">段子</string>
+
+
 </resources>
