@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.linxcool.wechoice.ui.widget.LViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:persistentDrawingCache="animation"/>
+    <FrameLayout
+        android:id="@+id/tabContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tabGroup"/>
 
     <RadioGroup
         android:id="@+id/tabGroup"
@@ -22,18 +22,18 @@
             android:id="@+id/tab0"
             style="@style/tabItem"
             android:checked="true"
-            android:text="@string/tab0"/>
+            android:text="@string/tab0" />
 
         <RadioButton
             android:id="@+id/tab1"
             style="@style/tabItem"
             android:checked="false"
-            android:text="@string/tab1"/>
+            android:text="@string/tab1" />
 
         <RadioButton
             android:id="@+id/tab2"
             style="@style/tabItem"
-            android:text="@string/tab2"/>
+            android:text="@string/tab2" />
 
     </RadioGroup>
 </RelativeLayout>
