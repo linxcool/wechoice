@@ -28,7 +28,7 @@ dependencies {
     compile 'com.android.support:design:23.4.0'
 
     // andbase required
-    compile 'com.github.linxcool:andbase:1.0.4'
+    compile 'com.github.linxcool:andbase:-SNAPSHOT'
 
     // butterknife required
     compile('com.jakewharton:butterknife:8.5.1', {

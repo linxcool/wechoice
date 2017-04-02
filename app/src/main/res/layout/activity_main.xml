@@ -8,12 +8,12 @@
         android:id="@+id/tabContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tabGroup"/>
+        android:layout_above="@+id/tabGroup" />
 
     <RadioGroup
         android:id="@+id/tabGroup"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="52dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bg_tab"
         android:orientation="horizontal">
@@ -22,18 +22,27 @@
             android:id="@+id/tab0"
             style="@style/tabItem"
             android:checked="true"
+            android:drawableTop="@drawable/tab_home"
             android:text="@string/tab0" />
 
         <RadioButton
             android:id="@+id/tab1"
             style="@style/tabItem"
             android:checked="false"
+            android:drawableTop="@drawable/tab_recom"
             android:text="@string/tab1" />
 
         <RadioButton
             android:id="@+id/tab2"
             style="@style/tabItem"
+            android:drawableTop="@drawable/tab_globe"
             android:text="@string/tab2" />
+
+        <RadioButton
+            android:id="@+id/tab3"
+            style="@style/tabItem"
+            android:drawableTop="@drawable/tab_my"
+            android:text="@string/tab3" />
 
     </RadioGroup>
 </RelativeLayout>
