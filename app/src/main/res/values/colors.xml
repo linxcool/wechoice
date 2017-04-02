@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
 
     <color name="def">#ff85c20f</color>
     <color name="def_hard">#ff2da93d</color>
 
-    <color name="gray">#AAAAAA</color>
+    <color name="dark">#242424</color>
+
+    <color name="gray">#666666</color>
+    <color name="gray_hard">#333333</color>
+    <color name="gray_split">#ffb2b2b2</color>
+
     <color name="blue">#004CF2</color>
-    <color name="split_gray">#ffb2b2b2</color>
+
+    <color name="colorPrimary">@color/dark</color>
+    <color name="colorPrimaryDark">@color/dark</color>
+    <color name="colorAccent">@color/def_hard</color>
 
     <color name="tab_bg">#fff7f7f7</color>
-    <color name="tab_bg_top_line">@color/split_gray</color>
+    <color name="tab_bg_top_line">@color/gray_split</color>
     <color name="tab_text_default">@color/gray</color>
     <color name="tab_text_selected">@color/def_hard</color>
+
+    <color name="subtab_text_default">@color/gray_hard</color>
+    <color name="subtab_text_selected">@color/def_hard</color>
 
 </resources>
