@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_touch"
+    android:orientation="horizontal"
+    android:padding="@dimen/def_padding">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:layout_marginRight="@dimen/def_margin"
+        android:layout_weight="2"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/txtMiddle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="习近平:吹响建设科技强国号角国号角国号角" />
+
+        <TextView
+            android:id="@+id/tvSummary"
+            style="@style/txtSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvTitle"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_frame_green"
+            android:text="新华社"
+            android:textColor="@color/txt_small_green" />
+
+        <TextView
+            android:id="@+id/tvPubTime"
+            style="@style/txtSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvSummary"
+            android:layout_toRightOf="@id/tvSummary"
+            android:text="05-28 20:09" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:layout_weight="1"
+        android:background="@color/bg_icon"
+        android:scaleType="centerCrop" />
+</LinearLayout>

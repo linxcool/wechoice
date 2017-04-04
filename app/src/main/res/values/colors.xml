@@ -8,13 +8,17 @@
 
     <color name="gray">#666666</color>
     <color name="gray_hard">#333333</color>
-    <color name="gray_split">#ffb2b2b2</color>
+    <color name="gray_split">#ccc</color>
 
     <color name="blue">#004CF2</color>
+    <color name="white">#ffffff</color>
 
     <color name="colorPrimary">@color/dark</color>
     <color name="colorPrimaryDark">@color/dark</color>
     <color name="colorAccent">@color/def_hard</color>
+
+    <color name="bg_for_touch">#2243BE56</color>
+    <color name="bg_for_touch_white">#22FFFFFF</color>
 
     <color name="tab_bg">#fff7f7f7</color>
     <color name="tab_bg_top_line">@color/gray_split</color>
@@ -23,5 +27,11 @@
 
     <color name="subtab_text_default">@color/gray_hard</color>
     <color name="subtab_text_selected">@color/def_hard</color>
+
+    <color name="txt_small">@color/gray</color>
+    <color name="txt_small_green">@color/def_hard</color>
+    <color name="txt_middle">@color/gray_hard</color>
+
+    <color name="bg_icon">#ccc</color>
 
 </resources>
