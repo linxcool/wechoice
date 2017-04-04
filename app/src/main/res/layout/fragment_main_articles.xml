@@ -1,14 +1,6 @@
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refreshLayout"
+<com.jcodecraeer.xrecyclerview.XRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:cacheColorHint="@null"
-        android:scrollbars="vertical" />
-
-</android.support.v4.widget.SwipeRefreshLayout>
+    android:layout_height="match_parent"
+    android:cacheColorHint="@null"
+    android:scrollbars="vertical" />
