@@ -1,11 +1,13 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="actionBarStyle">@style/LActionBarStyle</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimStyle</item>
+
     </style>
 
     <style name="LActionBarStyle" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -20,6 +22,11 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Widget.Design.AppBarLayout" parent="android:Widget">
+        <item name="elevation">0dp</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
 
     <style name="tabItem">
         <item name="android:layout_gravity">center</item>

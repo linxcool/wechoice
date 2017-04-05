@@ -8,4 +8,11 @@
         <item name="shadow_bottom">@drawable/shadow_bottom</item>
     </style>
 
+    <style name="ActivityAnimStyle" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/out_alpha</item>
+        <item name="android:activityCloseEnterAnimation">@anim/in_alpha</item>
+        <item name="android:activityCloseExitAnimation">@anim/out_from_right</item>
+    </style>
+
 </resources>
