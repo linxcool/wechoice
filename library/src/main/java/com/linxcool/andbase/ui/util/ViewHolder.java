@@ -1,4 +1,4 @@
-package com.linxcool.andbase.util.ui;
+package com.linxcool.andbase.ui.util;
 
 import android.util.SparseArray;
 import android.view.View;
