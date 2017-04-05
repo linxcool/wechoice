@@ -7,6 +7,8 @@
     <string name="tab2">段子</string>
     <string name="tab3">我的</string>
 
+    <string name="list_no_more">没有数据了</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
