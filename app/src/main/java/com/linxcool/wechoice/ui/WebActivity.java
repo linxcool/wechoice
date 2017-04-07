@@ -29,12 +29,14 @@ public class WebActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
         ButterKnife.bind(this);
+        initToolbar();
         initViews();
         start();
     }
 
     private void initViews() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         webView.setBackgroundColor(0);
 
         WebSettings settings = webView.getSettings();

@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseFragment;
@@ -20,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by linxcool on 17/3/16.
@@ -29,6 +34,8 @@ public class MainFragment extends BaseFragment<MainPresenter, MainModel> impleme
 
     @BindView(R.id.subTabs)
     TabLayout subTabs;
+    @BindView(R.id.ivMore)
+    ImageView ivMore;
     @BindView(R.id.subPages)
     ViewPager subPages;
 
@@ -49,6 +56,10 @@ public class MainFragment extends BaseFragment<MainPresenter, MainModel> impleme
     @Override
     public void showCategorys(List<ArticleCategory> categories) {
         adapter.refresh(categories);
+    }
+
+    @OnClick(R.id.ivMore)
+    public void onClick() {
     }
 
     class CmnFragmentPagerAdapter extends FragmentPagerAdapter {

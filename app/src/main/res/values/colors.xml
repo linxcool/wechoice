@@ -31,6 +31,7 @@
     <color name="txt_small">@color/gray</color>
     <color name="txt_small_green">@color/def_hard</color>
     <color name="txt_middle">@color/gray_hard</color>
+    <color name="txt_strong">@color/gray_hard</color>
 
     <color name="bg_icon">#ccc</color>
 

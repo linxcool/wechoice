@@ -28,16 +28,11 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void loadCategorys() {
-        RxCache.load(view.getActivity(),
-                "mainCategorys",
-                Integer.MAX_VALUE,
-                model.loadCategorys(),
-                false).subscribe(new ReplyObserver<List<ArticleCategory>>() {
+        model.loadCategorys().subscribe(new ReplyObserver<List<ArticleCategory>>() {
             @Override
             public void onSuccess(List<ArticleCategory> categories) {
                 view.showCategorys(categories);
             }
-
             @Override
             public void onFailure(int code, String msg) {
                 view.showToastMessage(msg);

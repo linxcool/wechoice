@@ -1,27 +1,19 @@
 <resources>
+    <style name="AppTheme" parent="AppTheme.Base"/>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="actionBarStyle">@style/LActionBarStyle</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimStyle</item>
-
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="LActionBarStyle" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="elevation">0dp</item>
-        <item name="titleTextStyle">@style/LActionBarTitleStyle</item>
-    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="LActionBarTitleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/def_hard</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="Widget.Design.AppBarLayout" parent="android:Widget">
         <item name="elevation">0dp</item>
@@ -31,7 +23,7 @@
     <style name="tabItem">
         <item name="android:layout_gravity">center</item>
         <item name="android:drawablePadding">2dp</item>
-        <item name="android:background">@color/tab_bg</item>
+        <item name="android:background">@drawable/bg_touch_tab</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/tab_text_color</item>
@@ -57,8 +49,8 @@
     </style>
 
     <style name="txtStrong">
-        <item name="android:textColor">@color/txt_middle</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/txt_strong</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">3dp</item>
     </style>
 </resources>
