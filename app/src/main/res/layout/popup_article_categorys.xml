@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_cover">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/popupTitleLayout"
+        android:background="@color/white"
+        android:paddingBottom="16dp"
+        android:paddingLeft="@dimen/def_padding"
+        android:paddingRight="@dimen/def_padding"
+        android:paddingTop="@dimen/def_padding" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/popupTitleLayout"
+        android:background="@color/gray_split" />
+
+    <RelativeLayout
+        android:id="@+id/popupTitleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/tab_bg">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/txt_all_categorys"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/vLine"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_toLeftOf="@+id/ivMore"
+            android:background="@color/gray_split" />
+
+        <ImageView
+            android:id="@+id/ivMore"
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_touch_tab"
+            android:scaleType="center"
+            android:src="@drawable/ic_more_down" />
+    </RelativeLayout>
+</RelativeLayout>

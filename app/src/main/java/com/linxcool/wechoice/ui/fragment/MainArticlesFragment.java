@@ -194,7 +194,7 @@ public class MainArticlesFragment extends BaseFragment<MainArticlePresenter, Mai
 
             if (holder instanceof ArticleViewHolder) {
                 ArticleViewHolder holder1 = (ArticleViewHolder) holder;
-                 Glide.with(getActivity()).load(item.getThumbnails()).into(holder1.ivIcon);
+                Glide.with(getActivity()).load(item.getThumbnails()).into(holder1.ivIcon);
             } else if (holder instanceof ArticleViewHolder3) {
                 ArticleViewHolder3 holder3 = (ArticleViewHolder3) holder;
                 Glide.with(getActivity()).load(item.getThumbnails()).into(holder3.ivIcon);

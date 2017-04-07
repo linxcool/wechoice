@@ -20,6 +20,11 @@
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
+    <style name="LPopupAnimStyle">
+        <item name="android:windowEnterAnimation">@anim/in_alpha</item>
+        <item name="android:windowExitAnimation">@anim/out_alpha</item>
+    </style>
+
     <style name="tabItem">
         <item name="android:layout_gravity">center</item>
         <item name="android:drawablePadding">2dp</item>

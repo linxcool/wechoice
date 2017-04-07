@@ -5,6 +5,7 @@
     <color name="def_hard">#ff2da93d</color>
 
     <color name="dark">#242424</color>
+    <color name="dark_cover">#55242424</color>
 
     <color name="gray">#666666</color>
     <color name="gray_hard">#333333</color>

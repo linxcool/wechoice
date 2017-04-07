@@ -32,6 +32,7 @@ public class MainModel implements MainContract.Model {
         categories.add(new ArticleCategory("junshi", "军事"));
         categories.add(new ArticleCategory("keji", "科技"));
         categories.add(new ArticleCategory("caijing", "财经"));
+        categories.add(new ArticleCategory("qita", "其他"));
         return Observable.just(Reply.success(categories)).observeOn(AndroidSchedulers.mainThread());
     }
 
