@@ -11,6 +11,7 @@ import com.linxcool.wechoice.base.BaseActivity;
 import com.linxcool.wechoice.data.entity.VideoCategory;
 import com.linxcool.wechoice.ui.fragment.EmptyFragment;
 import com.linxcool.wechoice.ui.fragment.ArticleFragment;
+import com.linxcool.wechoice.ui.fragment.ImageFragment;
 import com.linxcool.wechoice.ui.fragment.VideoFragment;
 import com.linxcool.wechoice.ui.fragment.VideoListFragment;
 
@@ -90,7 +91,7 @@ public class MainActivity extends BaseActivity {
         tabFragments = new ArrayList<>();
         tabFragments.add(new ArticleFragment());
         tabFragments.add(new VideoFragment());
-        tabFragments.add(new EmptyFragment());
+        tabFragments.add(new ImageFragment());
         tabFragments.add(new EmptyFragment());
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();

@@ -1,25 +1,15 @@
 package com.linxcool.wechoice.data;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.linxcool.andbase.retrofit.ParamsInterceptor;
-import com.linxcool.andbase.util.FileUtil;
-import com.linxcool.andbase.util.NetWorkUtil;
-import com.linxcool.andbase.util.TextUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.CacheControl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.internal.cache.CacheInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -57,6 +47,14 @@ public class ApiFactory {
                 .client(cacheClient)
                 .build()
                 .create(VideoApi.class));
+
+        map.put("image", new Retrofit.Builder()
+                .baseUrl("http://image.baidu.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(httpClient)
+                .build()
+                .create(ImageApi.class));
     }
 
     private static OkHttpClient createHttpClient(Context context) {
@@ -88,5 +86,9 @@ public class ApiFactory {
 
     public static VideoApi getVideoApi() {
         return (VideoApi) map.get("video");
+    }
+
+    public static ImageApi getImageApi() {
+        return (ImageApi) map.get("image");
     }
 }

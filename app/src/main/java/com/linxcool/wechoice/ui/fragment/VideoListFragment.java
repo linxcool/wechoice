@@ -85,7 +85,9 @@ public class VideoListFragment extends BaseFragment<VideoListPresenter, VideoLis
 
     @Override
     protected void onInitComplete() {
-        recyclerView.load();
+        if(data.isEmpty()) {
+            recyclerView.refresh();
+        }
     }
 
     @Override

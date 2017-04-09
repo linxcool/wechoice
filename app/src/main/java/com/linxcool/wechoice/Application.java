@@ -8,9 +8,16 @@ import com.linxcool.wechoice.data.ApiFactory;
 
 public class Application extends android.app.Application {
 
+    static Application app;
+
+    public static Application get() {
+        return app;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        app = this;
         ApiFactory.regist(this);
     }
 
