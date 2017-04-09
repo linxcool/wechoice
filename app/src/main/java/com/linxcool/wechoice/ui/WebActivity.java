@@ -1,10 +1,12 @@
 package com.linxcool.wechoice.ui;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -45,6 +47,11 @@ public class WebActivity extends BaseActivity {
         settings.setDomStorageEnabled(true);
         settings.setAppCacheEnabled(true);
         settings.setAllowFileAccess(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setAcceptThirdPartyCookies(webView, true);
+        }
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override

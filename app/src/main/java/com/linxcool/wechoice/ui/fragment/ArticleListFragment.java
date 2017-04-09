@@ -14,15 +14,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
-import com.linxcool.andbase.ui.util.DisplayUtil;
 import com.linxcool.andbase.util.TextUtil;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseFragment;
-import com.linxcool.wechoice.contract.MainArticleContract;
+import com.linxcool.wechoice.contract.ArticleListContract;
 import com.linxcool.wechoice.data.entity.ArticleCategory;
 import com.linxcool.wechoice.data.entity.ArticleItem;
-import com.linxcool.wechoice.data.model.MainArticleModel;
-import com.linxcool.wechoice.presenter.MainArticlePresenter;
+import com.linxcool.wechoice.data.model.ArticleListModel;
+import com.linxcool.wechoice.presenter.ArticleListPresenter;
 import com.linxcool.wechoice.ui.WebActivity;
 import com.linxcool.wechoice.ui.widget.LDecoration;
 import com.linxcool.wechoice.ui.widget.NoAlphaItemAnimator;
@@ -36,8 +35,8 @@ import butterknife.ButterKnife;
 
 import static android.R.id.list;
 
-public class MainArticlesFragment extends BaseFragment<MainArticlePresenter, MainArticleModel>
-        implements MainArticleContract.View, XRecyclerView.LoadingListener {
+public class ArticleListFragment extends BaseFragment<ArticleListPresenter, ArticleListModel>
+        implements ArticleListContract.View, XRecyclerView.LoadingListener {
 
     @BindView(list)
     XRecyclerView recyclerView;
@@ -47,26 +46,21 @@ public class MainArticlesFragment extends BaseFragment<MainArticlePresenter, Mai
     boolean isRefreshData = false;
     boolean isLoadingData = false;
 
-    int iconWith;
-
-    public static MainArticlesFragment newInstance(ArticleCategory category) {
+    public static ArticleListFragment newInstance(ArticleCategory category) {
         Bundle args = new Bundle();
         args.putString("cid", category.getCid());
-        MainArticlesFragment fragment = new MainArticlesFragment();
+        ArticleListFragment fragment = new ArticleListFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int getLayout(Activity activity) {
-        return R.layout.fragment_main_articles;
+        return R.layout.fragment_article_list;
     }
 
     @Override
     protected void initViews(LayoutInflater inflater, Bundle bundle) {
-        iconWith = DisplayUtil.getScreenWidth(getActivity()) - 4 * getDimension(R.dimen.def_padding);
-        iconWith /= 3;
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 

@@ -8,14 +8,18 @@ import android.widget.RadioGroup;
 
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
+import com.linxcool.wechoice.data.entity.VideoCategory;
 import com.linxcool.wechoice.ui.fragment.EmptyFragment;
-import com.linxcool.wechoice.ui.fragment.MainFragment;
+import com.linxcool.wechoice.ui.fragment.ArticleFragment;
+import com.linxcool.wechoice.ui.fragment.VideoFragment;
+import com.linxcool.wechoice.ui.fragment.VideoListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 public class MainActivity extends BaseActivity {
 
@@ -84,8 +88,8 @@ public class MainActivity extends BaseActivity {
         tabIds.put(R.id.tab3, 3);
 
         tabFragments = new ArrayList<>();
-        tabFragments.add(new MainFragment());
-        tabFragments.add(new EmptyFragment());
+        tabFragments.add(new ArticleFragment());
+        tabFragments.add(new VideoFragment());
         tabFragments.add(new EmptyFragment());
         tabFragments.add(new EmptyFragment());
 
@@ -112,5 +116,19 @@ public class MainActivity extends BaseActivity {
         }
         transaction.show(tabFragments.get(index));
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
     }
 }

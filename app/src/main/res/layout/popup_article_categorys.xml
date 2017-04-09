@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/popupTitleLayout"
         android:background="@color/white"
+        android:overScrollMode="never"
         android:paddingBottom="16dp"
         android:paddingLeft="@dimen/def_padding"
         android:paddingRight="@dimen/def_padding"
@@ -56,6 +57,6 @@
             android:layout_centerVertical="true"
             android:background="@drawable/bg_touch_tab"
             android:scaleType="center"
-            android:src="@drawable/ic_more_down" />
+            android:src="@drawable/ic_more_up" />
     </RelativeLayout>
 </RelativeLayout>

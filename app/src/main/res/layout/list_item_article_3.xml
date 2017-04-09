@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:ellipsize="end"
-        android:lines="1"
-        android:text="习近平:吹响建设科技强国号角国号角国号角" />
+        android:lines="1" />
 
     <LinearLayout
         android:id="@+id/ivIconLayout"
@@ -60,7 +59,6 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_frame_green"
-        android:text="新华社"
         android:textColor="@color/txt_small_green" />
 
     <TextView
@@ -69,7 +67,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/tvSummary"
-        android:layout_toRightOf="@+id/tvSummary"
-        android:text="05-28 20:09" />
+        android:layout_toRightOf="@+id/tvSummary"/>
 
 </RelativeLayout>

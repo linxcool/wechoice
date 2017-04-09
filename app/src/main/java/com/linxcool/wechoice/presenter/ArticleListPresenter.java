@@ -1,19 +1,19 @@
 package com.linxcool.wechoice.presenter;
 
 import com.linxcool.andbase.retrofit.SimpleObserver;
-import com.linxcool.wechoice.contract.MainArticleContract;
+import com.linxcool.wechoice.contract.ArticleListContract;
 import com.linxcool.wechoice.data.entity.ArticleList;
 
 /**
  * Created by linxcool on 17/3/16.
  */
 
-public class MainArticlePresenter implements MainArticleContract.Presenter {
+public class ArticleListPresenter implements ArticleListContract.Presenter {
 
-    MainArticleContract.View view;
-    MainArticleContract.Model model;
+    ArticleListContract.View view;
+    ArticleListContract.Model model;
 
-    public MainArticlePresenter(MainArticleContract.View view, MainArticleContract.Model model) {
+    public ArticleListPresenter(ArticleListContract.View view, ArticleListContract.Model model) {
         this.view = view;
         this.model = model;
     }

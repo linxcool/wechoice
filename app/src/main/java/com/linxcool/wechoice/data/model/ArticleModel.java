@@ -1,10 +1,7 @@
 package com.linxcool.wechoice.data.model;
 
 import com.linxcool.andbase.retrofit.Reply;
-import com.linxcool.andbase.rx.RxHelper;
-import com.linxcool.wechoice.AppConstant;
-import com.linxcool.wechoice.contract.MainContract;
-import com.linxcool.wechoice.data.ApiFactory;
+import com.linxcool.wechoice.contract.ArticleContract;
 import com.linxcool.wechoice.data.entity.ArticleCategory;
 
 import java.util.ArrayList;
@@ -17,7 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * Created by linxcool on 17/3/16.
  */
 
-public class MainModel implements MainContract.Model {
+public class ArticleModel implements ArticleContract.Model {
 
     @Override
     public Observable<Reply<List<ArticleCategory>>> loadCategorys() {

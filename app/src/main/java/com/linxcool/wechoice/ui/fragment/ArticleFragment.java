@@ -20,12 +20,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.linxcool.andbase.ui.util.DisplayUtil;
+import com.linxcool.andbase.ui.util.ToastUtil;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseFragment;
-import com.linxcool.wechoice.contract.MainContract;
+import com.linxcool.wechoice.contract.ArticleContract;
 import com.linxcool.wechoice.data.entity.ArticleCategory;
-import com.linxcool.wechoice.data.model.MainModel;
-import com.linxcool.wechoice.presenter.MainPresenter;
+import com.linxcool.wechoice.data.model.ArticleModel;
+import com.linxcool.wechoice.presenter.ArticlePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ import butterknife.OnClick;
  * Created by linxcool on 17/3/16.
  */
 
-public class MainFragment extends BaseFragment<MainPresenter, MainModel> implements MainContract.View {
+public class ArticleFragment extends BaseFragment<ArticlePresenter, ArticleModel> implements ArticleContract.View {
 
     @BindView(R.id.subTabs)
     TabLayout subTabs;
@@ -54,7 +55,7 @@ public class MainFragment extends BaseFragment<MainPresenter, MainModel> impleme
 
     @Override
     protected int getLayout(Activity activity) {
-        return R.layout.fragment_main;
+        return R.layout.fragment_article;
     }
 
     @Override
@@ -94,6 +95,7 @@ public class MainFragment extends BaseFragment<MainPresenter, MainModel> impleme
     @OnClick(R.id.ivMore)
     public void onClick() {
         popupWindow.showAsDropDown(subTabs, 0, -dp2px(38));
+        popupAdapter.notifyDataSetChanged();
     }
 
     class CmnFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -104,7 +106,7 @@ public class MainFragment extends BaseFragment<MainPresenter, MainModel> impleme
 
         @Override
         public Fragment getItem(int position) {
-            return MainArticlesFragment.newInstance(categories.get(position));
+            return ArticleListFragment.newInstance(categories.get(position));
         }
 
         @Override
@@ -158,6 +160,12 @@ public class MainFragment extends BaseFragment<MainPresenter, MainModel> impleme
         @Override
         public void onClick(View v) {
             int pos = getLayoutPosition();
+            if(pos < categories.size() - 1) {
+                subPages.setCurrentItem(pos, true);
+                popupWindow.dismiss();
+            } else {
+                ToastUtil.show(getActivity(), "敬请期待");
+            }
         }
     }
 }

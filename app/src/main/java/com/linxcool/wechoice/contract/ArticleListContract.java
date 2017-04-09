@@ -17,7 +17,7 @@ import io.reactivex.Observable;
  * Created by linxcool on 17/3/16.
  */
 
-public interface MainArticleContract extends BaseContract {
+public interface ArticleListContract extends BaseContract {
 
     interface View extends BaseView<BaseView> {
 
