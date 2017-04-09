@@ -136,7 +136,7 @@ public class VideoListFragment extends BaseFragment<VideoListPresenter, VideoLis
     @Override
     public void onRefresh() {
         isRefreshData = true;
-        presenter.loadVideos(true, 0);
+        presenter.loadVideos(!data.isEmpty(), 0);
     }
 
     @Override

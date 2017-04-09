@@ -21,6 +21,8 @@ public interface ImageListContract extends BaseContract {
 
         String getCategoryId();
 
+        List<ImageItem> getImages();
+
         void showImages(List<ImageItem> list);
 
         void showLoadImagesFailure(String msg);

@@ -1,5 +1,7 @@
 package com.linxcool.wechoice.presenter;
 
+import android.util.Log;
+
 import com.linxcool.andbase.retrofit.SimpleObserver;
 import com.linxcool.wechoice.contract.ImageListContract;
 import com.linxcool.wechoice.data.entity.ImageList;
@@ -19,24 +21,28 @@ public class ImageListPresenter implements ImageListContract.Presenter {
     }
 
     @Override
-    public void start() {}
+    public void start() {
+    }
 
     @Override
-    public void loadImages(boolean fromNetwork, int page) {
+    public void loadImages(final boolean fromNetwork, final int page) {
+        Log.e("AAAAA", ">>>>load image + " + page + " -> " + fromNetwork);
+
         SimpleObserver observer = new SimpleObserver<ImageList>() {
             @Override
             public void onNext(ImageList value) {
-                if (value.getData() == null) {
-                    view.showLoadImagesFailure("服务异常，无数据返回");
-                    return;
+                if (value.getReturnNumber() <= 0) {
+                    view.showToastMessage("请检查网络或重试");
+                } else {
+                    view.showImages(value.getData());
                 }
-                view.showImages(value.getData());
             }
 
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
-                view.showLoadImagesFailure("请检查网络！");
+                if (fromNetwork) view.showToastMessage("请检查网络或重试");
+                else loadImages(true, page);
             }
 
         };

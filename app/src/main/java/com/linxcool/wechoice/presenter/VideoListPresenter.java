@@ -21,19 +21,22 @@ public class VideoListPresenter implements VideoListContract.Presenter {
     }
 
     @Override
-    public void start() {}
+    public void start() {
+    }
 
     @Override
-    public void loadVideos(boolean fromNetwork, int page) {
+    public void loadVideos(final boolean fromNetwork, final int page) {
         SimpleObserver observer = new SimpleObserver<List<VideoItem>>() {
             @Override
             public void onNext(List<VideoItem> value) {
                 view.showVideos(value);
             }
+
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
-                view.showLoadVideosFailure("请检查网络！");
+                if (fromNetwork) view.showLoadVideosFailure("请检查网络或重试");
+                else loadVideos(true, page);
             }
 
         };

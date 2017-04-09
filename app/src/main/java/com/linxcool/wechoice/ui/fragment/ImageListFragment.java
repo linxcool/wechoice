@@ -63,9 +63,8 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
 
     @Override
     protected void initViews(LayoutInflater inflater, Bundle bundle) {
-        int padding = getDimension(R.dimen.def_padding) / 4;
+        int padding = getDimension(R.dimen.def_padding) / 2;
         imgWidth = (DisplayUtil.getScreenWidth(getActivity()) - 6 * padding) / 2;
-
         recyclerView.setPadding(padding, 0, padding, 0);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
@@ -80,12 +79,19 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
 
     @Override
     protected void onInitComplete() {
-        recyclerView.refresh();
+        if(data.isEmpty()) {
+            recyclerView.refresh();
+        }
     }
 
     @Override
     public String getCategoryId() {
         return getArguments().getString("cid");
+    }
+
+    @Override
+    public List<ImageItem> getImages() {
+        return data;
     }
 
     @Override
@@ -129,13 +135,13 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
     @Override
     public void onRefresh() {
         isRefreshData = true;
-        presenter.loadImages(true, 0);
+        presenter.loadImages(!data.isEmpty(), 0);
     }
 
     @Override
     public void onLoadMore() {
         isLoadingData = true;
-        presenter.loadImages(false, currentPage + 1);
+        presenter.loadImages(!data.isEmpty(), currentPage + 1);
     }
 
     class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> {

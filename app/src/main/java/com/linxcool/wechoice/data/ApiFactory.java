@@ -52,7 +52,7 @@ public class ApiFactory {
                 .baseUrl("http://image.baidu.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(httpClient)
+                .client(cacheClient)
                 .build()
                 .create(ImageApi.class));
     }
@@ -74,8 +74,8 @@ public class ApiFactory {
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(new ParamsInterceptor())
-                .addInterceptor(new ApiCacheInterceptor(context))
-                .addNetworkInterceptor(new ApiCacheInterceptor(context))
+                .addInterceptor(new ApiCacheInterceptor(context, false))
+                .addNetworkInterceptor(new ApiCacheInterceptor(context, true))
                 .cache(cache)
                 .build();
     }

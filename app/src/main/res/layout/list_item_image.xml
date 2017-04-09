@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="vertical">
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="5dp"
+    card_view:cardUseCompatPadding="false">
 
-    <ImageView
-        android:id="@+id/ivImg"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@color/gray_split"
-        android:scaleType="centerCrop" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        style="@style/txtMiddle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left" />
+        <ImageView
+            android:id="@+id/ivImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/txtMiddle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="5dp" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

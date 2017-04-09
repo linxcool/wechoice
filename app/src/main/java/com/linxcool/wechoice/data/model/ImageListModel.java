@@ -29,7 +29,9 @@ public class ImageListModel implements ImageListContract.Model {
 
     @Override
     public Observable<ImageList> loadPreviousImages(final String tag, int page) {
-        return loadNetworkImages(tag, page);
+        Observable<ImageList> fromNetwork = ApiFactory.getImageApi()
+                .queryLocalImageList(page, ImageList.PAGE_SIZE, tag, "");
+        return fromNetwork.compose(RxHelper.<ImageList>scheduleIo2UiThread());
     }
 
 }

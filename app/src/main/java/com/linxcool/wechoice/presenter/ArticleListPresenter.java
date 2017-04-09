@@ -2,7 +2,10 @@ package com.linxcool.wechoice.presenter;
 
 import com.linxcool.andbase.retrofit.SimpleObserver;
 import com.linxcool.wechoice.contract.ArticleListContract;
+import com.linxcool.wechoice.data.entity.ArticleItem;
 import com.linxcool.wechoice.data.entity.ArticleList;
+
+import java.util.List;
 
 /**
  * Created by linxcool on 17/3/16.
@@ -22,16 +25,21 @@ public class ArticleListPresenter implements ArticleListContract.Presenter {
     public void start() {}
 
     @Override
-    public void loadArticles(boolean fromNetwork) {
+    public void loadArticles(final boolean fromNetwork) {
         SimpleObserver observer = new SimpleObserver<ArticleList>() {
             @Override
             public void onNext(ArticleList value) {
-                if (value.getErrorCode() != 0) {
+                if (value.getErrorCode() != 0 || value.getReply() == null) {
                     view.showLoadArticlesFailure(value.getReason() + "，错误码：" + value.getErrorCode());
                     return;
                 }
-                if (value.getReply() == null || value.getReply().getData() == null) {
+                List<ArticleItem> data = value.getReply().getData();
+                if (data == null) {
                     view.showLoadArticlesFailure("服务异常，无数据返回");
+                    return;
+                }
+                if(data.isEmpty() && !fromNetwork) {
+                    loadArticles(true);
                     return;
                 }
                 view.showArticles(value.getReply().getData());
@@ -40,7 +48,7 @@ public class ArticleListPresenter implements ArticleListContract.Presenter {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
-                view.showLoadArticlesFailure("请检查网络！");
+                view.showLoadArticlesFailure("请检查网络或重试");
             }
 
         };
