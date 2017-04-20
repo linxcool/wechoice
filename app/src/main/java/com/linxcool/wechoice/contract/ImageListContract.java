@@ -37,9 +37,9 @@ public interface ImageListContract extends BaseContract {
 
     interface Model extends BaseModel {
 
-        Observable<ImageList> loadNetworkImages(String tag, int page);
+        Observable<List<ImageItem>> loadNetworkImages(String tag, int page);
 
-        Observable<ImageList> loadPreviousImages(String tag, int page);
+        Observable<List<ImageItem>> loadPreviousImages(String tag, int page);
 
     }
 

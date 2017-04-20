@@ -3,8 +3,17 @@ package com.linxcool.wechoice.presenter;
 import android.util.Log;
 
 import com.linxcool.andbase.retrofit.SimpleObserver;
+import com.linxcool.andbase.util.LogUtil;
 import com.linxcool.wechoice.contract.ImageListContract;
 import com.linxcool.wechoice.data.entity.ImageList;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.adapter.rxjava2.HttpException;
 
 /**
  * Created by linxcool on 17/3/16.
@@ -26,7 +35,7 @@ public class ImageListPresenter implements ImageListContract.Presenter {
 
     @Override
     public void loadImages(final boolean fromNetwork, final int page) {
-        Log.e("AAAAA", ">>>>load image + " + page + " -> " + fromNetwork);
+        LogUtil.iFormat("load %s images page %d, fromNetwork %s", view.getCategoryId(), page, String.valueOf(fromNetwork));
 
         SimpleObserver observer = new SimpleObserver<ImageList>() {
             @Override
@@ -40,19 +49,30 @@ public class ImageListPresenter implements ImageListContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-                e.printStackTrace();
-                if (fromNetwork) view.showToastMessage("请检查网络或重试");
-                else loadImages(true, page);
+                if (fromNetwork) {
+                    view.showToastMessage("请检查网络或重试");
+                    e.printStackTrace();
+                } else {
+                    LogUtil.eFormat("can't find data(%s) from cache", view.getCategoryId());
+                    loadImages(true, page);
+                }
             }
 
+        };
+
+        Predicate<ImageList> filter = new Predicate<ImageList>() {
+            @Override
+            public boolean test(ImageList value) throws Exception {
+                return false;
+            }
         };
 
         String cid = view.getCategoryId();
 
         if (fromNetwork) {
-            model.loadNetworkImages(cid, page).subscribe(observer);
+            model.loadNetworkImages(cid, page).filter(filter).subscribe(observer);
         } else {
-            model.loadPreviousImages(cid, page).subscribe(observer);
+            model.loadPreviousImages(cid, page).filter(filter).subscribe(observer);
         }
     }
 }

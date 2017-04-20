@@ -2,7 +2,9 @@ package com.linxcool.wechoice.base;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.linxcool.andbase.mvp.BasePresenter;
 import com.linxcool.andbase.mvp.BaseView;
 import com.linxcool.andbase.ui.util.DisplayUtil;
 import com.linxcool.andbase.ui.util.ToastUtil;
+import com.linxcool.andbase.util.LogUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
@@ -29,13 +32,11 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
     public E model;
 
     private ProgressDialog progressDialog;
-    private View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (rootView == null) {
-            rootView = inflater.inflate(getLayout(getActivity()), container, false);
-        }
+        printDebugLog("onCreateView");
+        View rootView = inflater.inflate(getLayout(getActivity()), container, false);
         ButterKnife.bind(this, rootView);
         initViews(inflater, savedInstanceState);
         initializeMvp(this);
@@ -88,6 +89,10 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         // Useless
     }
 
+    private void printDebugLog(String msg) {
+        LogUtil.i(this + " -> " + msg);
+    }
+
     public void showToastMessage(String msg) {
         ToastUtil.showInUiThread(getActivity(), msg);
     }
@@ -121,4 +126,54 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
     protected int getDimension(int resId) {
         return (int) getResources().getDimension(resId);
     }
+
+    // 以下日志仅作问题检查
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        printDebugLog("onCreate");
+        super.onCreate(savedInstanceState);
+    }
+    @Override
+    public void onAttach(Context context) {
+        printDebugLog("onAttach");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onAttachFragment(Fragment childFragment) {
+        printDebugLog("onAttachFragment");
+        super.onAttachFragment(childFragment);
+    }
+
+    @Override
+    public void onStart() {
+        printDebugLog("onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        printDebugLog("onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        printDebugLog("onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        printDebugLog("onStop");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        printDebugLog("onDestroy");
+        super.onDestroy();
+    }
+
 }
