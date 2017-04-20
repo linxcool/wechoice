@@ -80,7 +80,7 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
     @Override
     protected void onInitComplete() {
         if(data.isEmpty()) {
-            recyclerView.refresh();
+            recyclerView.load();
         }
     }
 
@@ -135,13 +135,18 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
     @Override
     public void onRefresh() {
         isRefreshData = true;
-        presenter.loadImages(!data.isEmpty(), 0);
+        presenter.loadImages(true, 0);
     }
 
     @Override
     public void onLoadMore() {
         isLoadingData = true;
-        presenter.loadImages(!data.isEmpty(), currentPage + 1);
+
+        if(data.isEmpty()) {
+            presenter.loadImages(false, 0);
+        } else {
+            presenter.loadImages(true, currentPage + 1);
+        }
     }
 
     class ImageAdapter extends RecyclerView.Adapter<ImageViewHolder> {

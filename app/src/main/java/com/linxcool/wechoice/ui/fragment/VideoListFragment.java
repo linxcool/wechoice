@@ -86,7 +86,7 @@ public class VideoListFragment extends BaseFragment<VideoListPresenter, VideoLis
     @Override
     protected void onInitComplete() {
         if(data.isEmpty()) {
-            recyclerView.refresh();
+            recyclerView.load();
         }
     }
 
@@ -136,13 +136,17 @@ public class VideoListFragment extends BaseFragment<VideoListPresenter, VideoLis
     @Override
     public void onRefresh() {
         isRefreshData = true;
-        presenter.loadVideos(!data.isEmpty(), 0);
+        presenter.loadVideos(true, 0);
     }
 
     @Override
     public void onLoadMore() {
         isLoadingData = true;
-        presenter.loadVideos(!data.isEmpty(), currentPage + 1);
+        if(data.isEmpty()) {
+            presenter.loadVideos(false, 0);
+        } else {
+            presenter.loadVideos(true, currentPage + 1);
+        }
     }
 
     class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {
