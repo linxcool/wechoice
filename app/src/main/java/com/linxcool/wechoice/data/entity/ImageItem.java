@@ -2,6 +2,8 @@ package com.linxcool.wechoice.data.entity;
 
 import com.linxcool.andbase.util.TextUtil;
 
+import java.util.Objects;
+
 /**
  * Created by linxcool on 17/4/9.
  */
@@ -36,6 +38,10 @@ public class ImageItem {
 
     private int fixWidth;
     private int fixHeight;
+
+    public String getId() {
+        return id;
+    }
 
     public String getImageUrl() {
         return image_url;
@@ -82,4 +88,19 @@ public class ImageItem {
             fixHeight = fixWidth * image_height / image_width;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ImageItem imageItem = (ImageItem) o;
+
+        return id != null ? id.equals(imageItem.id) : imageItem.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

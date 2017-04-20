@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ImageList {
 
-    public static final int PAGE_SIZE = 10;
+    public static final int PAGE_SIZE = 20;
 
     private int totalNum;
     private int start_index;

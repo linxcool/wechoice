@@ -1,19 +1,16 @@
 package com.linxcool.wechoice.presenter;
 
-import android.util.Log;
-
 import com.linxcool.andbase.retrofit.SimpleObserver;
 import com.linxcool.andbase.util.LogUtil;
 import com.linxcool.wechoice.contract.ImageListContract;
-import com.linxcool.wechoice.data.entity.ImageList;
+import com.linxcool.wechoice.data.entity.ImageItem;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.functions.Predicate;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.adapter.rxjava2.HttpException;
+
+import static android.R.attr.value;
 
 /**
  * Created by linxcool on 17/3/16.
@@ -31,48 +28,48 @@ public class ImageListPresenter implements ImageListContract.Presenter {
 
     @Override
     public void start() {
+        // Empty
     }
 
     @Override
     public void loadImages(final boolean fromNetwork, final int page) {
-        LogUtil.iFormat("load %s images page %d, fromNetwork %s", view.getCategoryId(), page, String.valueOf(fromNetwork));
+        final String cid = view.getCategoryId();
 
-        SimpleObserver observer = new SimpleObserver<ImageList>() {
+        LogUtil.iFormat("load %s images page %d, fromNetwork %s", cid, page, String.valueOf(fromNetwork));
+
+        model.loadImages(fromNetwork, cid, page).filter(new Predicate<List<ImageItem>>() {
             @Override
-            public void onNext(ImageList value) {
-                if (value.getReturnNumber() <= 0) {
-                    view.showToastMessage("请检查网络或重试");
-                } else {
-                    view.showImages(value.getData());
+            public boolean test(List<ImageItem> list) throws Exception {
+                List<ImageItem> viewData = view.getImages();
+                List<ImageItem> clearList = new ArrayList<>();
+                for (ImageItem item : list) {
+                    if (viewData.contains(item) || item.getId() == null) {
+                        clearList.add(item);
+                    }
                 }
+                list.removeAll(clearList);
+                if(clearList.size() > 0) {
+                    LogUtil.w("remove duplicate images count " + clearList.size());
+                }
+                return true;
+            }
+        }).subscribe(new SimpleObserver<List<ImageItem>>() {
+            @Override
+            public void onNext(List<ImageItem> value) {
+                view.showImages(value);
             }
 
             @Override
             public void onError(Throwable e) {
                 if (fromNetwork) {
-                    view.showToastMessage("请检查网络或重试");
+                    view.showLoadImagesFailure("请检查网络或重试");
                     e.printStackTrace();
                 } else {
-                    LogUtil.eFormat("can't find data(%s) from cache", view.getCategoryId());
+                    LogUtil.eFormat("can't find data(%s) from cache", cid);
                     loadImages(true, page);
                 }
             }
 
-        };
-
-        Predicate<ImageList> filter = new Predicate<ImageList>() {
-            @Override
-            public boolean test(ImageList value) throws Exception {
-                return false;
-            }
-        };
-
-        String cid = view.getCategoryId();
-
-        if (fromNetwork) {
-            model.loadNetworkImages(cid, page).filter(filter).subscribe(observer);
-        } else {
-            model.loadPreviousImages(cid, page).filter(filter).subscribe(observer);
-        }
+        });
     }
 }

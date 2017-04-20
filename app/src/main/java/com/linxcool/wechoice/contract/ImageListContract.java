@@ -5,7 +5,6 @@ import com.linxcool.andbase.mvp.BaseModel;
 import com.linxcool.andbase.mvp.BasePresenter;
 import com.linxcool.andbase.mvp.BaseView;
 import com.linxcool.wechoice.data.entity.ImageItem;
-import com.linxcool.wechoice.data.entity.ImageList;
 
 import java.util.List;
 
@@ -37,9 +36,7 @@ public interface ImageListContract extends BaseContract {
 
     interface Model extends BaseModel {
 
-        Observable<List<ImageItem>> loadNetworkImages(String tag, int page);
-
-        Observable<List<ImageItem>> loadPreviousImages(String tag, int page);
+        Observable<List<ImageItem>> loadImages(boolean fromNetwork, String tag, int page);
 
     }
 

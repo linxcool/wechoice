@@ -2,6 +2,7 @@ package com.linxcool.wechoice.ui.fragment;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.linxcool.wechoice.data.entity.ImageCategory;
 import com.linxcool.wechoice.data.entity.ImageItem;
 import com.linxcool.wechoice.data.model.ImageListModel;
 import com.linxcool.wechoice.presenter.ImageListPresenter;
+import com.linxcool.wechoice.ui.ImageDetailActivity;
 import com.linxcool.wechoice.ui.widget.SpacesItemDecoration;
 import com.linxcool.wechoice.ui.widget.XRecyclerView;
 
@@ -202,6 +204,9 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
         public void onClick(View v) {
             int pos = getLayoutPosition() - 1;
             if (pos >= 0 && pos < data.size()) {
+                Intent intent = new Intent(getActivity(), ImageDetailActivity.class);
+                intent.putExtra("url", data.get(pos).getImageUrl());
+                startActivity(intent);
             }
         }
     }

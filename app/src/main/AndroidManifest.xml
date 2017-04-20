@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".ui.WebActivity" />
+        <activity android:name=".ui.ImageDetailActivity"/>
     </application>
 
 </manifest>
