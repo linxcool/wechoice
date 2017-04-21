@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@android:color/black">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:background="@drawable/bg_toolbar_shade"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="@string/tab2"
-        tools:alpha="1.0" />
+        android:layout_height="48dp"
+        android:background="?attr/colorPrimary"
+        app:contentInsetStart="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/AppTheme.AppBarOverlay" />
 
     <com.linxcool.wechoice.ui.widget.PullBackLayout
-        android:id="@+id/pull_back_layout"
+        android:id="@+id/pullBackLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/toolbar"
         android:layout_gravity="center">
 
-        <ImageView
-            android:id="@+id/photo_touch_iv"
+        <com.linxcool.wechoice.ui.widget.photoview.PhotoView
+            android:id="@+id/photoViw"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -37,5 +31,5 @@
     </com.linxcool.wechoice.ui.widget.PullBackLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
 

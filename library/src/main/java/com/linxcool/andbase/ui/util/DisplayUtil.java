@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 
@@ -159,6 +160,10 @@ public class DisplayUtil {
         view.measure(w, h);//先度量
         int height = view.getMeasuredHeight();
         return height;
+    }
+
+    public static View getRootView(Activity activity) {
+        return ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
     }
 
 }

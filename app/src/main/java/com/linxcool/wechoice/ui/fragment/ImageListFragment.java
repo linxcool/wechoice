@@ -205,7 +205,7 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
             int pos = getLayoutPosition() - 1;
             if (pos >= 0 && pos < data.size()) {
                 Intent intent = new Intent(getActivity(), ImageDetailActivity.class);
-                intent.putExtra("url", data.get(pos).getImageUrl());
+                intent.putExtra("item", data.get(pos));
                 startActivity(intent);
             }
         }

@@ -1,48 +1,39 @@
 package com.linxcool.wechoice.ui;
 
-import android.content.Context;
-import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.linxcool.andbase.ui.util.StatusBarCompat;
+import com.linxcool.andbase.ui.util.DisplayUtil;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
+import com.linxcool.wechoice.data.entity.ImageItem;
 import com.linxcool.wechoice.ui.widget.PullBackLayout;
+import com.linxcool.wechoice.ui.widget.photoview.PhotoView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * des:大图详情
- * Created by xsf
- * on 2016.09.14:35
- */
 public class ImageDetailActivity extends BaseActivity implements PullBackLayout.Callback {
 
 
-    @BindView(R.id.photo_touch_iv)
-    ImageView photoTouchIv;
-    @BindView(R.id.pull_back_layout)
+    @BindView(R.id.photoViw)
+    PhotoView photoTouchIv;
+    @BindView(R.id.pullBackLayout)
     PullBackLayout pullBackLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private boolean mIsToolBarHidden;
-    private boolean mIsStatusBarHidden;
-    private ColorDrawable mBackground;
+    ColorDrawable background;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarCompat.translucentStatusBar(this);
         setContentView(R.layout.activity_image_detail);
         ButterKnife.bind(this);
         initToolbar();
@@ -50,57 +41,47 @@ public class ImageDetailActivity extends BaseActivity implements PullBackLayout.
     }
 
     public void initView() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         pullBackLayout.setCallback(this);
-        toolBarFadeIn();
-        loadPhotoIv();
-    }
 
-    private void loadPhotoIv() {
-        String url = getIntent().getStringExtra("url");
-        Glide.with(this).load(url)
+        background = new ColorDrawable(Color.BLACK);
+        DisplayUtil.getRootView(this).setBackgroundDrawable(background);
+
+        ImageItem item = (ImageItem) getIntent().getSerializableExtra("item");
+        Glide.with(this).load(item.getImageUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.jc_error_normal)
                 .crossFade()
                 .into(photoTouchIv);
-    }
 
+        setTitle(item.getTitle());
 
-    protected void hideOrShowToolbar() {
-        toolbar.animate()
-                .alpha(mIsToolBarHidden ? 1.0f : 0.0f)
-                .setInterpolator(new DecelerateInterpolator(2))
-                .start();
-        mIsToolBarHidden = !mIsToolBarHidden;
-    }
-
-    private void hideOrShowStatusBar() {
-        if (mIsStatusBarHidden) {
-        } else {
-        }
-        mIsStatusBarHidden = !mIsStatusBarHidden;
-    }
-
-    private void toolBarFadeIn() {
-        mIsToolBarHidden = true;
-        hideOrShowToolbar();
+        toolBarFadeIn();
     }
 
     @Override
     public void onPullStart() {
         toolBarFadeOut();
-        mIsStatusBarHidden = true;
-        hideOrShowStatusBar();
+    }
+
+    private void toolBarFadeIn() {
+        toolbar.animate()
+                .alpha(1.0f)
+                .setInterpolator(new DecelerateInterpolator(2))
+                .start();
     }
 
     private void toolBarFadeOut() {
-        mIsToolBarHidden = false;
-        hideOrShowToolbar();
+        toolbar.animate()
+                .alpha(0.0f)
+                .setInterpolator(new DecelerateInterpolator(2))
+                .start();
     }
 
     @Override
     public void onPull(float progress) {
         progress = Math.min(1f, progress * 3f);
-        //mBackground.setAlpha((int) (0xff * (1f - progress)));
+        background.setAlpha((int) (0xff * (1f - progress)));
     }
 
     @Override
@@ -114,8 +95,14 @@ public class ImageDetailActivity extends BaseActivity implements PullBackLayout.
     }
 
     @Override
-    public void supportFinishAfterTransition() {
-        super.supportFinishAfterTransition();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

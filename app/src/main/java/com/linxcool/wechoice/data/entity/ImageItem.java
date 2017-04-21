@@ -2,13 +2,14 @@ package com.linxcool.wechoice.data.entity;
 
 import com.linxcool.andbase.util.TextUtil;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Created by linxcool on 17/4/9.
  */
 
-public class ImageItem {
+public class ImageItem implements Serializable {
 
     private String id;
     private String date;
