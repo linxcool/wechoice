@@ -40,6 +40,9 @@ public class ImageListPresenter implements ImageListContract.Presenter {
         model.loadImages(fromNetwork, cid, page).filter(new Predicate<List<ImageItem>>() {
             @Override
             public boolean test(List<ImageItem> list) throws Exception {
+                if (page == 0) {
+                    return true;
+                }
                 List<ImageItem> viewData = view.getImages();
                 List<ImageItem> clearList = new ArrayList<>();
                 for (ImageItem item : list) {
@@ -48,7 +51,7 @@ public class ImageListPresenter implements ImageListContract.Presenter {
                     }
                 }
                 list.removeAll(clearList);
-                if(clearList.size() > 0) {
+                if (clearList.size() > 0) {
                     LogUtil.w("remove duplicate images count " + clearList.size());
                 }
                 return true;

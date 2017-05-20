@@ -96,12 +96,12 @@ public class ImageItem implements Serializable {
 
         ImageItem imageItem = (ImageItem) o;
 
-        return id != null ? id.equals(imageItem.id) : imageItem.id == null;
+        return image_url != null ? image_url.equals(imageItem.image_url) : imageItem.image_url == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return image_url != null ? image_url.hashCode() : 0;
     }
 }

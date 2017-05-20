@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.linxcool.andbase.ui.util.DisplayUtil;
 import com.linxcool.wechoice.R;
@@ -81,7 +82,7 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
 
     @Override
     protected void onInitComplete() {
-        if(data.isEmpty()) {
+        if (data.isEmpty()) {
             recyclerView.load();
         }
     }
@@ -144,7 +145,7 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
     public void onLoadMore() {
         isLoadingData = true;
 
-        if(data.isEmpty()) {
+        if (data.isEmpty()) {
             presenter.loadImages(false, 0);
         } else {
             presenter.loadImages(true, currentPage + 1);
@@ -176,8 +177,11 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
             params.height = item.getFixHeight();
             Glide.with(getActivity())
                     .load(item.getThumbLargeUrl())
+                    .asBitmap()
                     .placeholder(new ColorDrawable(Color.TRANSPARENT))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holder.ivImg);
+
         }
 
         @Override

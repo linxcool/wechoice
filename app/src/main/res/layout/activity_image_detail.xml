@@ -21,11 +21,25 @@
         android:layout_below="@+id/toolbar"
         android:layout_gravity="center">
 
+        <ImageView
+            android:id="@+id/thumbViw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
+
         <com.linxcool.wechoice.ui.widget.photoview.PhotoView
             android:id="@+id/photoViw"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:layout_gravity="center" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center" />
         <!--使用PhotoView，共享动画不平滑-->
     </com.linxcool.wechoice.ui.widget.PullBackLayout>

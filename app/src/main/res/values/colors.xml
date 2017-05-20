@@ -18,6 +18,8 @@
     <color name="colorPrimaryDark">@color/dark</color>
     <color name="colorAccent">@color/def_hard</color>
 
+    <color name="bg_gray">#eee</color>
+
     <color name="bg_for_touch">#2243BE56</color>
     <color name="bg_for_touch_white">#22FFFFFF</color>
 

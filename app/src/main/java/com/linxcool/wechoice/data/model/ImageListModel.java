@@ -27,7 +27,7 @@ public class ImageListModel implements ImageListContract.Model {
     public Observable<List<ImageItem>> loadImages(boolean fromNetwork, String tag, int page) {
         ImageApi api = ApiFactory.getImageApi();
         Observable<ImageList> observable;
-        String tag2 = "";
+        String tag2 = "全部";
 
         if (fromNetwork) observable = api.queryImageList(page, ImageList.PAGE_SIZE, tag, tag2);
         else observable = api.queryLocalImageList(page, ImageList.PAGE_SIZE, tag, tag2);

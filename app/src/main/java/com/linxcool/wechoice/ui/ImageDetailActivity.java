@@ -5,10 +5,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.linxcool.andbase.ui.util.DisplayUtil;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
@@ -21,13 +27,16 @@ import butterknife.ButterKnife;
 
 public class ImageDetailActivity extends BaseActivity implements PullBackLayout.Callback {
 
-
-    @BindView(R.id.photoViw)
-    PhotoView photoTouchIv;
-    @BindView(R.id.pullBackLayout)
-    PullBackLayout pullBackLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.pullBackLayout)
+    PullBackLayout pullBackLayout;
+    @BindView(R.id.photoViw)
+    PhotoView photoView;
+    @BindView(R.id.thumbViw)
+    ImageView thumbViw;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     ColorDrawable background;
 
@@ -48,11 +57,22 @@ public class ImageDetailActivity extends BaseActivity implements PullBackLayout.
         DisplayUtil.getRootView(this).setBackgroundDrawable(background);
 
         ImageItem item = (ImageItem) getIntent().getSerializableExtra("item");
+
+        Glide.with(this).load(item.getThumbLargeUrl())
+                .into(thumbViw);
+
         Glide.with(this).load(item.getImageUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.jc_error_normal)
                 .crossFade()
-                .into(photoTouchIv);
+                .into(new SimpleTarget<GlideDrawable>() {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        photoView.setImageDrawable(resource);
+                        progressBar.setVisibility(View.GONE);
+                        thumbViw.setVisibility(View.GONE);
+                    }
+                });
 
         setTitle(item.getTitle());
 

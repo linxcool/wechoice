@@ -1,16 +1,20 @@
 <resources>
-    <string name="app_name">微甄选</string>
+    <string name="app_name">有料</string>
     <string name="action_settings">Settings</string>
 
     <string name="tab0">首页</string>
     <string name="tab1">视频</string>
     <string name="tab2">壁纸</string>
-    <string name="tab3">关注</string>
+    <string name="tab3">我的</string>
 
     <string name="list_no_more">没有数据了</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="txt_all_categorys">全部分类</string>
+
+    <string name="mine_menu_news">收藏的新闻</string>
+    <string name="mine_menu_image">收藏的美图</string>
+    <string name="mine_menu_about">关注有料</string>
+
+    <string name="mine_name_def">资深收藏家</string>
+    <string name="mine_tag_def">你的是我的，我的还是我的。</string>
 </resources>

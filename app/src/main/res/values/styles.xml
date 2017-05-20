@@ -1,5 +1,6 @@
 <resources>
-    <style name="AppTheme" parent="AppTheme.Base"/>
+
+    <style name="AppTheme" parent="AppTheme.Base" />
 
     <style name="AlphaTheme" parent="AppTheme.Base">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -16,9 +17,9 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Widget.Design.AppBarLayout" parent="android:Widget">
         <item name="elevation">0dp</item>
@@ -55,6 +56,7 @@
     <style name="txtMiddle">
         <item name="android:textColor">@color/txt_middle</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:lineSpacingExtra">3dp</item>
     </style>
 
