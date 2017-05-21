@@ -88,8 +88,8 @@ public class MainActivity extends BaseActivity {
 
         tabFragments = new ArrayList<>();
         tabFragments.add(new ArticleFragment());
-        tabFragments.add(new VideoFragment());
         tabFragments.add(new ImageFragment());
+        tabFragments.add(new VideoFragment());
         tabFragments.add(new MineFragment());
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();

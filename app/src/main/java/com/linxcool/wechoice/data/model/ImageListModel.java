@@ -24,13 +24,12 @@ import static android.R.id.list;
 public class ImageListModel implements ImageListContract.Model {
 
     @Override
-    public Observable<List<ImageItem>> loadImages(boolean fromNetwork, String tag, int page) {
+    public Observable<List<ImageItem>> loadImages(boolean fromNetwork, String col, String tag, int page) {
         ImageApi api = ApiFactory.getImageApi();
         Observable<ImageList> observable;
-        String tag2 = "全部";
 
-        if (fromNetwork) observable = api.queryImageList(page, ImageList.PAGE_SIZE, tag, tag2);
-        else observable = api.queryLocalImageList(page, ImageList.PAGE_SIZE, tag, tag2);
+        if (fromNetwork) observable = api.queryImageList(page, ImageList.PAGE_SIZE, col, tag);
+        else observable = api.queryLocalImageList(page, ImageList.PAGE_SIZE, col, tag);
 
         return observable.flatMap(new Function<ImageList, ObservableSource<List<ImageItem>>>() {
             @Override

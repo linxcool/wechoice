@@ -28,11 +28,11 @@ public class MineFragment extends BaseFragment<MinePresenter, MineModel> impleme
     @BindView(R.id.tvNote)
     TextView tvNote;
     @BindView(R.id.btnNews)
-    Button btnNews;
+    TextView btnNews;
     @BindView(R.id.btnImages)
-    Button btnImages;
+    TextView btnImages;
     @BindView(R.id.btnAbout)
-    Button btnAbout;
+    TextView btnAbout;
 
     @Override
     protected int getLayout(Activity activity) {

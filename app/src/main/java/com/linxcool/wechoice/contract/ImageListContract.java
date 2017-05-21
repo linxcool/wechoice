@@ -18,7 +18,9 @@ public interface ImageListContract extends BaseContract {
 
     interface View extends BaseView<BaseView> {
 
-        String getCategoryId();
+        String getImageCol();
+
+        String getImageTag();
 
         List<ImageItem> getImages();
 
@@ -36,7 +38,7 @@ public interface ImageListContract extends BaseContract {
 
     interface Model extends BaseModel {
 
-        Observable<List<ImageItem>> loadImages(boolean fromNetwork, String tag, int page);
+        Observable<List<ImageItem>> loadImages(boolean fromNetwork, String col, String tag, int page);
 
     }
 

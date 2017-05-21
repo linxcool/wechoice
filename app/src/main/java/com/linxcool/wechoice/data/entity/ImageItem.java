@@ -3,7 +3,6 @@ package com.linxcool.wechoice.data.entity;
 import com.linxcool.andbase.util.TextUtil;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Created by linxcool on 17/4/9.
@@ -17,25 +16,25 @@ public class ImageItem implements Serializable {
     private String abs;
     private String desc;
 
-    private String image_url;
-    private int image_width;
-    private int image_height;
+    private String imageUrl;
+    private int imageWidth;
+    private int imageHeight;
 
-    private String download_url;
+    private String downloadUrl;
 
-    private String thumbnail_url;
-    private int thumbnail_width;
-    private int thumbnail_height;
+    private String thumbnailUrl;
+    private int thumbnailWidth;
+    private int thumbnailHeight;
 
-    private String thumb_large_url;
-    private int thumb_large_width;
-    private int thumb_large_height;
+    private String thumbLargeUrl;
+    private int thumbLargeWidth;
+    private int thumbLargeHeight;
 
     private String hostname;
-    private String site_url;
-    private String from_url;
-    private String obj_url;
-    private String share_url;
+    private String siteUrl;
+    private String fromUrl;
+    private String objUrl;
+    private String shareUrl;
 
     private int fixWidth;
     private int fixHeight;
@@ -45,15 +44,17 @@ public class ImageItem implements Serializable {
     }
 
     public String getImageUrl() {
-        return image_url;
-    }
-
-    public String getThumbnailUrl() {
-        return thumbnail_url;
+        if (TextUtil.notEmpty(imageUrl))
+            return imageUrl;
+        if (TextUtil.notEmpty(downloadUrl))
+            return downloadUrl;
+        return getThumbLargeUrl();
     }
 
     public String getThumbLargeUrl() {
-        return thumb_large_url;
+        if (TextUtil.notEmpty(thumbLargeUrl))
+            return thumbLargeUrl;
+        return thumbnailUrl;
     }
 
     public String getTitle() {
@@ -73,7 +74,7 @@ public class ImageItem implements Serializable {
     }
 
     public boolean isLegal() {
-        return TextUtil.notEmpty(image_url);
+        return TextUtil.notEmpty(imageUrl);
     }
 
     public void fixSize(int fixWidth) {
@@ -81,12 +82,12 @@ public class ImageItem implements Serializable {
             return;
         }
         this.fixWidth = fixWidth;
-        if (thumb_large_width > 0)
-            fixHeight = fixWidth * thumb_large_height / thumb_large_width;
-        else if (thumbnail_width > 0)
-            fixHeight = fixWidth * thumbnail_height / thumbnail_width;
-        else if (image_width > 0)
-            fixHeight = fixWidth * image_height / image_width;
+        if (thumbLargeWidth > 0)
+            fixHeight = fixWidth * thumbLargeHeight / thumbLargeWidth;
+        else if (thumbnailWidth > 0)
+            fixHeight = fixWidth * thumbnailHeight / thumbnailWidth;
+        else if (imageWidth > 0)
+            fixHeight = fixWidth * imageHeight / imageWidth;
     }
 
     @Override
@@ -96,12 +97,12 @@ public class ImageItem implements Serializable {
 
         ImageItem imageItem = (ImageItem) o;
 
-        return image_url != null ? image_url.equals(imageItem.image_url) : imageItem.image_url == null;
+        return imageUrl != null ? imageUrl.equals(imageItem.imageUrl) : imageItem.imageUrl == null;
 
     }
 
     @Override
     public int hashCode() {
-        return image_url != null ? image_url.hashCode() : 0;
+        return imageUrl != null ? imageUrl.hashCode() : 0;
     }
 }

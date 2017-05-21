@@ -4,6 +4,7 @@
     android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -17,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/vLine"
             app:tabSelectedTextColor="@color/subtab_text_selected"
-            app:tabTextColor="@color/subtab_text_default"/>
+            app:tabTextColor="@color/subtab_text_default" />
 
         <View
             android:id="@+id/vLine"
@@ -26,7 +27,7 @@
             android:layout_marginBottom="3dp"
             android:layout_marginTop="3dp"
             android:layout_toLeftOf="@+id/imageIvMore"
-            android:background="@color/gray_split"/>
+            android:background="@color/gray_split" />
 
         <ImageView
             android:id="@+id/imageIvMore"
@@ -36,13 +37,31 @@
             android:layout_centerVertical="true"
             android:background="@drawable/bg_touch_tab"
             android:scaleType="center"
-            android:src="@drawable/ic_more_down"/>
+            android:src="@drawable/ic_more_down" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/gray_split" />
+
+    <!--
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvTags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/def_margin"
+        android:layout_marginRight="@dimen/def_margin"
+        android:overScrollMode="never"
+        android:paddingLeft="-8dp"
+        android:paddingRight="-8dp"
+        android:scrollbars="none" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_split" />
+    -->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/imageSubPages"

@@ -13,19 +13,19 @@ import retrofit2.http.Query;
 
 public interface ImageApi {
 
-    @GET("channel/listjson?ie=utf8")
+    @GET("data/imgs?p=channel&from=1")
     Observable<ImageList> queryImageList(
             @Query("pn") int page,
             @Query("rn") int pageSize,
-            @Query("tag1") String tag1,
-            @Query("tag2") String tag2);
+            @Query("col") String col,
+            @Query("tag") String tag);
 
 
     @Headers("Cache-Force: true")
-    @GET("channel/listjson?ie=utf8")
+    @GET("data/imgs?p=channel&from=1")
     Observable<ImageList> queryLocalImageList(
             @Query("pn") int page,
             @Query("rn") int pageSize,
-            @Query("tag1") String tag1,
-            @Query("tag2") String tag2);
+            @Query("col") String col,
+            @Query("tag") String tag);
 }

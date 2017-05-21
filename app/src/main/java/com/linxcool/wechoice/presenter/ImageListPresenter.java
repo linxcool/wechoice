@@ -10,8 +10,6 @@ import java.util.List;
 
 import io.reactivex.functions.Predicate;
 
-import static android.R.attr.value;
-
 /**
  * Created by linxcool on 17/3/16.
  */
@@ -33,11 +31,13 @@ public class ImageListPresenter implements ImageListContract.Presenter {
 
     @Override
     public void loadImages(final boolean fromNetwork, final int page) {
-        final String cid = view.getCategoryId();
+        final String col = view.getImageCol();
+        final String tag = view.getImageTag();
+        final String key = col + "-" + tag;
 
-        LogUtil.iFormat("load %s images page %d, fromNetwork %s", cid, page, String.valueOf(fromNetwork));
+        LogUtil.iFormat("load %s images page %d, fromNetwork %s", key, page, String.valueOf(fromNetwork));
 
-        model.loadImages(fromNetwork, cid, page).filter(new Predicate<List<ImageItem>>() {
+        model.loadImages(fromNetwork, col, tag, page).filter(new Predicate<List<ImageItem>>() {
             @Override
             public boolean test(List<ImageItem> list) throws Exception {
                 if (page == 0) {
@@ -68,7 +68,7 @@ public class ImageListPresenter implements ImageListContract.Presenter {
                     view.showLoadImagesFailure("请检查网络或重试");
                     e.printStackTrace();
                 } else {
-                    LogUtil.eFormat("can't find data(%s) from cache", cid);
+                    LogUtil.eFormat("can't find data(%s) from cache", key);
                     loadImages(true, page);
                 }
             }

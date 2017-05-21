@@ -16,16 +16,25 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class ImageModel implements ImageContract.Model {
 
+    String[] MVTAGS = {
+            "唯美", "长腿", "诱惑", "气质", "可爱",
+            "性感", "车模", "写真", "素颜",
+            "小清新", "嫩萝莉", "非主流", "cosplay",
+            "西洋美人", "古典美女", "宅男女神",
+            "网络美女", "真人美女秀场"
+    };
+
+    String[] BZTAGS = {
+            "唯美", "风景", "静物", "美女", "宠物",
+            "明星", "游戏", "影视", "动漫"
+    };
+
     @Override
     public Observable<Reply<List<ImageCategory>>> loadCategorys() {
         List<ImageCategory> categories = new ArrayList<>();
-        categories.add(new ImageCategory("壁纸"));
-        categories.add(new ImageCategory("美女"));
-        categories.add(new ImageCategory("明星"));
-        categories.add(new ImageCategory("动漫"));
-        categories.add(new ImageCategory("搞笑"));
-        categories.add(new ImageCategory("宠物"));
-        categories.add(new ImageCategory("摄影"));
+        for (int i = 0; i < MVTAGS.length; i++) {
+            categories.add(new ImageCategory("美女", MVTAGS[i]));
+        }
         return Observable.just(Reply.success(categories)).observeOn(AndroidSchedulers.mainThread());
     }
 

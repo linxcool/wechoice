@@ -20,7 +20,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.linxcool.andbase.ui.util.DisplayUtil;
-import com.linxcool.andbase.ui.util.ToastUtil;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseFragment;
 import com.linxcool.wechoice.contract.ImageContract;
@@ -51,6 +50,7 @@ public class ImageFragment extends BaseFragment<ImagePresenter, ImageModel> impl
     PopupWindow popupWindow;
     CmnFragmentPagerAdapter pageAdapter;
     PobupAdapter popupAdapter;
+
     List<ImageCategory> categories = new ArrayList<>();
 
     @Override
@@ -116,7 +116,7 @@ public class ImageFragment extends BaseFragment<ImagePresenter, ImageModel> impl
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return categories.get(position).getName();
+            return categories.get(position).toString();
         }
     }
 
@@ -131,7 +131,7 @@ public class ImageFragment extends BaseFragment<ImagePresenter, ImageModel> impl
 
         @Override
         public void onBindViewHolder(PobupViewHolder holder, int position) {
-            holder.tvTitle.setText(categories.get(position).getName());
+            holder.tvTitle.setText(categories.get(position).toString());
             int current = subPages.getCurrentItem();
             if (current == position) {
                 holder.tvTitle.setTextColor(getColor(R.color.subtab_text_selected));
@@ -160,12 +160,9 @@ public class ImageFragment extends BaseFragment<ImagePresenter, ImageModel> impl
         @Override
         public void onClick(View v) {
             int pos = getLayoutPosition();
-            if(pos < categories.size() - 1) {
-                subPages.setCurrentItem(pos, true);
-                popupWindow.dismiss();
-            } else {
-                ToastUtil.show(getActivity(), "敬请期待");
-            }
+            subPages.setCurrentItem(pos, true);
+            popupWindow.dismiss();
         }
     }
+
 }

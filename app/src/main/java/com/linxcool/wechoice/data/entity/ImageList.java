@@ -11,15 +11,15 @@ public class ImageList {
     public static final int PAGE_SIZE = 20;
 
     private int totalNum;
-    private int start_index;
-    private int return_number;
-    private List<ImageItem> data;
+    private int startIndex;
+    private int returnNumber;
+    private List<ImageItem> imgs;
 
     public int getReturnNumber() {
-        return return_number;
+        return returnNumber;
     }
 
     public List<ImageItem> getData() {
-        return data;
+        return imgs;
     }
 }

@@ -38,7 +38,8 @@ import butterknife.ButterKnife;
 
 import static android.R.id.list;
 
-public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageListModel>
+@Deprecated
+public class DeprecatedImageListFragment extends BaseFragment<ImageListPresenter, ImageListModel>
         implements ImageListContract.View, XRecyclerView.LoadingListener {
 
     @BindView(list)
@@ -54,10 +55,10 @@ public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageLis
     ImageCategory category;
     String currentTag;
 
-    public static ImageListFragment newInstance(ImageCategory category) {
+    public static DeprecatedImageListFragment newInstance(ImageCategory category) {
         Bundle args = new Bundle();
         args.putSerializable("category", category);
-        ImageListFragment fragment = new ImageListFragment();
+        DeprecatedImageListFragment fragment = new DeprecatedImageListFragment();
         fragment.setArguments(args);
         return fragment;
     }

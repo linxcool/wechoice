@@ -2,7 +2,10 @@ package com.linxcool.wechoice.ui;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.linxcool.andbase.ui.util.DisplayUtil;
+import com.linxcool.andbase.ui.util.ToastUtil;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
 import com.linxcool.wechoice.data.entity.ImageItem;
@@ -25,7 +29,7 @@ import com.linxcool.wechoice.ui.widget.photoview.PhotoView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ImageDetailActivity extends BaseActivity implements PullBackLayout.Callback {
+public class ImageDetailActivity extends BaseActivity implements Handler.Callback, PullBackLayout.Callback {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -38,6 +42,8 @@ public class ImageDetailActivity extends BaseActivity implements PullBackLayout.
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    Handler handler;
+    ImageItem item;
     ColorDrawable background;
 
     @Override
@@ -50,33 +56,22 @@ public class ImageDetailActivity extends BaseActivity implements PullBackLayout.
     }
 
     public void initView() {
+        handler = new Handler(this);
+        item = (ImageItem) getIntent().getSerializableExtra("item");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         pullBackLayout.setCallback(this);
 
         background = new ColorDrawable(Color.BLACK);
         DisplayUtil.getRootView(this).setBackgroundDrawable(background);
 
-        ImageItem item = (ImageItem) getIntent().getSerializableExtra("item");
-
-        Glide.with(this).load(item.getThumbLargeUrl())
-                .into(thumbViw);
-
-        Glide.with(this).load(item.getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.jc_error_normal)
-                .crossFade()
-                .into(new SimpleTarget<GlideDrawable>() {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                        photoView.setImageDrawable(resource);
-                        progressBar.setVisibility(View.GONE);
-                        thumbViw.setVisibility(View.GONE);
-                    }
-                });
+        Glide.with(this).load(item.getThumbLargeUrl()).into(thumbViw);
 
         setTitle(item.getTitle());
 
         toolBarFadeIn();
+
+        handler.sendEmptyMessageDelayed(0, 100);
     }
 
     @Override
@@ -125,4 +120,37 @@ public class ImageDetailActivity extends BaseActivity implements PullBackLayout.
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeMessages(0);
+    }
+
+    @Override
+    public boolean handleMessage(Message msg) {
+        if (isFinishing()) {
+            return false;
+        }
+
+        Glide.with(this).load(item.getImageUrl())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(target);
+        return false;
+    }
+
+    SimpleTarget target = new SimpleTarget<GlideDrawable>() {
+        @Override
+        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+            photoView.setImageDrawable(resource);
+            progressBar.setVisibility(View.GONE);
+            thumbViw.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+            progressBar.setVisibility(View.GONE);
+            ToastUtil.showInUiThread(ImageDetailActivity.this, "图片加载失败");
+            e.printStackTrace();
+        }
+    };
 }
