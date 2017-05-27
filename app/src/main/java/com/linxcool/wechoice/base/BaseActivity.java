@@ -4,12 +4,13 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.linxcool.andbase.ui.swipeback.SwipeBackActivity;
 import com.linxcool.andbase.ui.util.ToastUtil;
 import com.linxcool.wechoice.R;
 
-public class BaseActivity extends SwipeBackActivity {
+public class BaseActivity extends SwipeBackActivity implements Toolbar.OnMenuItemClickListener  {
 
     protected ProgressDialog progressDialog;
     protected FragmentManager fragmentManager;
@@ -26,7 +27,13 @@ public class BaseActivity extends SwipeBackActivity {
             setSupportActionBar(toolbar);
             setTitle(getString(R.string.app_name));
             toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+            toolbar.setOnMenuItemClickListener(this);
         }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return true;
     }
 
     public void showToastMessage(String msg) {

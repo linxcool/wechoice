@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -15,6 +16,7 @@ import android.widget.ProgressBar;
 
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
+import com.linxcool.wechoice.util.WeChatTool;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +36,8 @@ public class WebActivity extends BaseActivity {
         initToolbar();
         initViews();
         start();
+
+        WeChatTool.init(this);
     }
 
     private void initViews() {
@@ -82,6 +86,12 @@ public class WebActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_more, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -92,6 +102,16 @@ public class WebActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.action_share) {
+            String url = getIntent().getStringExtra("url");
+            WeChatTool.shareWeb(url);
+        } else if (item.getItemId() == R.id.action_collect) {
+            showToastMessage("点击了收藏");
+        }
+        return true;
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -101,4 +121,6 @@ public class WebActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 }

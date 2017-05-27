@@ -3,6 +3,23 @@ apply plugin: 'com.android.application'
 // support for butterknife (next see dependencies in this file)
 apply plugin: 'com.jakewharton.butterknife'
 
+def keystoreFilepath = ''
+def keystorePWD = ''
+def keystoreAlias = ''
+def keystoreAliasPWD = ''
+def keyfile = file('s.keystore.temp')
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+keystoreFilepath = properties.getProperty("keystore.path")
+
+if (keystoreFilepath) {
+    keystorePWD = properties.getProperty("keystore.password")
+    keystoreAlias = properties.getProperty("keystore.alias")
+    keystoreAliasPWD = properties.getProperty("keystore.alias_password")
+    keyfile = file(keystoreFilepath)
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -14,10 +31,34 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            storeFile keyfile
+            storePassword keystorePWD
+            keyAlias keystoreAlias
+            keyPassword keystoreAliasPWD
+        }
+        release {
+            storeFile keyfile
+            storePassword keystorePWD
+            keyAlias keystoreAlias
+            keyPassword keystoreAliasPWD
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名文件存在，则签名
+            if (keyfile.exists()) {
+                println("WITH -> buildTypes -> release: using opensdk key")
+                signingConfig signingConfigs.release
+            }else {
+                println("WITH -> buildTypes -> release: using default key")
+            }
         }
     }
 }
@@ -58,4 +99,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    // third libs required: wechat
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }
