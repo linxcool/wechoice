@@ -34,12 +34,10 @@ import butterknife.ButterKnife;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
-import static android.R.id.list;
-
 public class VideoListFragment extends BaseFragment<VideoListPresenter, VideoListModel>
         implements VideoListContract.View, XRecyclerView.LoadingListener {
 
-    @BindView(list)
+    @BindView(R.id.list)
     XRecyclerView recyclerView;
 
     VideoAdapter adapter;

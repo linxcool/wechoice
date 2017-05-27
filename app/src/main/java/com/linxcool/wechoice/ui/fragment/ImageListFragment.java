@@ -36,12 +36,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.id.list;
-
 public class ImageListFragment extends BaseFragment<ImageListPresenter, ImageListModel>
         implements ImageListContract.View, XRecyclerView.LoadingListener {
 
-    @BindView(list)
+    @BindView(R.id.list)
     XRecyclerView recyclerView;
 
     ImageAdapter adapter;

@@ -33,12 +33,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.id.list;
-
 public class ArticleListFragment extends BaseFragment<ArticleListPresenter, ArticleListModel>
         implements ArticleListContract.View, XRecyclerView.LoadingListener {
 
-    @BindView(list)
+    @BindView(R.id.list)
     XRecyclerView recyclerView;
 
     ArticleAdapter adapter;
