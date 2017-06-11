@@ -119,6 +119,8 @@ public class CacheUtil {
      */
     public String getAsString(String key) {
         File file = manager.get(key);
+        if (!file.exists())
+            return null;
         byte[] bytes = FileUtil.readFile(file);
         if (bytes == null)
             return null;
@@ -611,6 +613,7 @@ public class CacheUtil {
 
     /**
      * 支持对字节数据添加过期时间标志的类，保存时添加，获取时去除
+     *
      * @see #createDateInfo(int)
      */
     private static class DataUtil {

@@ -7,11 +7,13 @@ import android.util.SparseArray;
 import android.widget.RadioGroup;
 
 import com.igexin.sdk.PushManager;
+import com.linxcool.andbase.util.LogUtil;
+import com.linxcool.trdsdk.PushService;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
-import com.linxcool.wechoice.ui.fragment.MineFragment;
 import com.linxcool.wechoice.ui.fragment.ArticleFragment;
 import com.linxcool.wechoice.ui.fragment.ImageFragment;
+import com.linxcool.wechoice.ui.fragment.MineFragment;
 import com.linxcool.wechoice.ui.fragment.VideoFragment;
 
 import java.util.ArrayList;
@@ -22,47 +24,6 @@ import butterknife.ButterKnife;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 public class MainActivity extends BaseActivity {
-
-    /*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.app_bar_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-    */
 
     @BindView(R.id.tabGroup)
     RadioGroup tabGroup;
@@ -111,9 +72,11 @@ public class MainActivity extends BaseActivity {
     }
 
     void initSdks() {
-        // com.getui.demo.DemoPushService 为第三方自定义推送服务
+        LogUtil.e("start init third sdks");
+        PushManager.getInstance().initialize(getApplicationContext(), null);
+        PushManager.getInstance().registerPushIntentService(getApplicationContext(), PushService.class);
+        LogUtil.e("end init third sdks");
     }
-
 
     private void showFrament(int index) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();

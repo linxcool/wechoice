@@ -36,6 +36,10 @@ public class ParamsInterceptor implements Interceptor {
     public Response intercept(Interceptor.Chain chain) throws IOException {
         Request oldRequest = chain.request();
 
+        if(logable) {
+            Log.d("andbase", "" + oldRequest.url());
+        }
+
         // 添加新的参数
         HttpUrl.Builder authorizedUrlBuilder = oldRequest.url()
                 .newBuilder()
