@@ -18,6 +18,12 @@ public interface MineContract {
 
     interface View extends BaseView<BaseView> {
 
+        void toCollectArticlesUi();
+
+        void toCollectImagesUi();
+
+        void showAboutUi();
+
     }
 
     interface Presenter extends BasePresenter {

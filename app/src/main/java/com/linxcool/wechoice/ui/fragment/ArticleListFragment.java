@@ -222,7 +222,7 @@ public class ArticleListFragment extends BaseFragment<ArticleListPresenter, Arti
             if (pos >= 0 && pos < data.size()) {
                 ArticleItem item = data.get(pos);
                 Intent intent = new Intent(getContext(), WebActivity.class);
-                intent.putExtra("url", item.getUrl());
+                intent.putExtra("item", item);
                 startActivity(intent);
             }
         }

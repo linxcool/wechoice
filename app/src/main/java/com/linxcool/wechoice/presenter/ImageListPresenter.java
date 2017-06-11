@@ -3,6 +3,8 @@ package com.linxcool.wechoice.presenter;
 import com.linxcool.andbase.retrofit.SimpleObserver;
 import com.linxcool.andbase.util.LogUtil;
 import com.linxcool.wechoice.contract.ImageListContract;
+import com.linxcool.wechoice.data.CollectDataCache;
+import com.linxcool.wechoice.data.entity.ArticleItem;
 import com.linxcool.wechoice.data.entity.ImageItem;
 
 import java.util.ArrayList;
@@ -31,6 +33,15 @@ public class ImageListPresenter implements ImageListContract.Presenter {
 
     @Override
     public void loadImages(final boolean fromNetwork, final int page) {
+        final String col = view.getImageCol();
+        if (CollectDataCache.isCollectCategory(col)) {
+            loadCollectImages(fromNetwork, page);
+        } else {
+            loadNormalImages(fromNetwork, page);
+        }
+    }
+
+    public void loadNormalImages(final boolean fromNetwork, final int page) {
         final String col = view.getImageCol();
         final String tag = view.getImageTag();
         final String key = col + "-" + tag;
@@ -74,5 +85,13 @@ public class ImageListPresenter implements ImageListContract.Presenter {
             }
 
         });
+    }
+
+    public void loadCollectImages(boolean fromNetwork, int page) {
+        if (page == 0) {
+            view.showImages(CollectDataCache.getImages());
+        } else {
+            view.showImages(new ArrayList<ImageItem>());
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.SparseArray;
 import android.widget.RadioGroup;
 
+import com.igexin.sdk.PushManager;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
 import com.linxcool.wechoice.ui.fragment.MineFragment;
@@ -77,6 +78,7 @@ public class MainActivity extends BaseActivity {
         setSwipeBackEnable(false);
         initTabFragments();
         initToolbar();
+        initSdks();
     }
 
     private void initTabFragments() {
@@ -107,6 +109,11 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+    void initSdks() {
+        // com.getui.demo.DemoPushService 为第三方自定义推送服务
+    }
+
 
     private void showFrament(int index) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();

@@ -1,6 +1,7 @@
 package com.linxcool.wechoice;
 
 import com.linxcool.wechoice.data.ApiFactory;
+import com.linxcool.wechoice.data.CollectDataCache;
 
 /**
  * Created by linxcool on 17/3/15.
@@ -8,17 +9,11 @@ import com.linxcool.wechoice.data.ApiFactory;
 
 public class Application extends android.app.Application {
 
-    static Application app;
-
-    public static Application get() {
-        return app;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
-        app = this;
         ApiFactory.regist(this);
+        CollectDataCache.regist(this);
     }
 
 }

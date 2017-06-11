@@ -24,7 +24,8 @@ public class ApiFactory {
     private static HashMap<String, Object> map;
 
     public static void regist(Context context) {
-        ParamsInterceptor.setLogable(true);
+        // 数据量大时不注释将引发异常
+        // ParamsInterceptor.setLogable(true);
         ArticleDataSource.regist(context);
 
         httpClient = createHttpClient(context);

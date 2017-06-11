@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.linxcool.andbase.mvp.BaseModel;
 import com.linxcool.andbase.mvp.BasePresenter;
@@ -32,6 +33,7 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
     public E model;
 
     private ProgressDialog progressDialog;
+    private View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -134,6 +136,7 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         printDebugLog("onCreate");
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public void onAttach(Context context) {
         printDebugLog("onAttach");
@@ -176,4 +179,24 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         super.onDestroy();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbindDrawables(rootView);
+    }
+
+    private void unbindDrawables(View view) {
+        if (view == null) {
+            return;
+        }
+        if (view.getBackground() != null) {
+            view.getBackground().setCallback(null);
+        }
+        if (view instanceof ViewGroup && !(view instanceof AdapterView)) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                unbindDrawables(((ViewGroup) view).getChildAt(i));
+            }
+            ((ViewGroup) view).removeAllViews();
+        }
+    }
 }

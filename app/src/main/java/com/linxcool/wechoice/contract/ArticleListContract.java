@@ -1,7 +1,5 @@
 package com.linxcool.wechoice.contract;
 
-import android.app.Activity;
-
 import com.linxcool.andbase.mvp.BaseContract;
 import com.linxcool.andbase.mvp.BaseModel;
 import com.linxcool.andbase.mvp.BasePresenter;

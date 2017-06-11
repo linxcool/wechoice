@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -22,9 +23,11 @@ import com.linxcool.andbase.ui.util.DisplayUtil;
 import com.linxcool.andbase.ui.util.ToastUtil;
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
+import com.linxcool.wechoice.data.CollectDataCache;
 import com.linxcool.wechoice.data.entity.ImageItem;
 import com.linxcool.wechoice.ui.widget.PullBackLayout;
 import com.linxcool.wechoice.ui.widget.photoview.PhotoView;
+import com.linxcool.wechoice.util.WeChatTool;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -110,17 +113,6 @@ public class ImageDetailActivity extends BaseActivity implements Handler.Callbac
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         handler.removeMessages(0);
@@ -150,7 +142,50 @@ public class ImageDetailActivity extends BaseActivity implements Handler.Callbac
         public void onLoadFailed(Exception e, Drawable errorDrawable) {
             progressBar.setVisibility(View.GONE);
             ToastUtil.showInUiThread(ImageDetailActivity.this, "图片加载失败");
-            e.printStackTrace();
+            if(e != null) {
+                e.printStackTrace();
+            }
         }
     };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_more, menu);
+        menu.getItem(0).setVisible(false);
+        if (CollectDataCache.contains(item)) {
+            menu.getItem(1).setTitle(R.string.action_collect_remove);
+        } else {
+            menu.getItem(1).setTitle(R.string.action_collect);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menu) {
+        if (menu.getItemId() == R.id.action_share) {
+            String url = getIntent().getStringExtra("url");
+            WeChatTool.shareWeb(url);
+        } else if (menu.getItemId() == R.id.action_collect) {
+            if (CollectDataCache.contains(item)) {
+                CollectDataCache.remove(item);
+                showToastMessage("取消收藏成功");
+            } else {
+                CollectDataCache.save(item);
+                showToastMessage("加入收藏成功");
+            }
+            invalidateOptionsMenu();
+        }
+        return true;
+    }
 }

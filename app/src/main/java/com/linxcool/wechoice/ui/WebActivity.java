@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 
 import com.linxcool.wechoice.R;
 import com.linxcool.wechoice.base.BaseActivity;
+import com.linxcool.wechoice.data.CollectDataCache;
+import com.linxcool.wechoice.data.entity.ArticleItem;
 import com.linxcool.wechoice.util.WeChatTool;
 
 import butterknife.BindView;
@@ -28,6 +30,8 @@ public class WebActivity extends BaseActivity {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    ArticleItem item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +40,6 @@ public class WebActivity extends BaseActivity {
         initToolbar();
         initViews();
         start();
-
-        WeChatTool.init(this);
     }
 
     private void initViews() {
@@ -77,17 +79,24 @@ public class WebActivity extends BaseActivity {
     }
 
     private void start() {
-        String url = getIntent().getStringExtra("url");
-        if (TextUtils.isEmpty(url)) {
+        WeChatTool.init(this);
+        item = (ArticleItem) getIntent().getSerializableExtra("item");
+
+        if (TextUtils.isEmpty(item.getUrl())) {
             finish();
         } else {
-            webView.loadUrl(url);
+            webView.loadUrl(item.getUrl());
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_more, menu);
+        if (CollectDataCache.contains(item)) {
+            menu.getItem(1).setTitle(R.string.action_collect_remove);
+        } else {
+            menu.getItem(1).setTitle(R.string.action_collect);
+        }
         return true;
     }
 
@@ -103,12 +112,19 @@ public class WebActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        if (item.getItemId() == R.id.action_share) {
+    public boolean onMenuItemClick(MenuItem menu) {
+        if (menu.getItemId() == R.id.action_share) {
             String url = getIntent().getStringExtra("url");
             WeChatTool.shareWeb(url);
-        } else if (item.getItemId() == R.id.action_collect) {
-            showToastMessage("点击了收藏");
+        } else if (menu.getItemId() == R.id.action_collect) {
+            if (CollectDataCache.contains(item)) {
+                CollectDataCache.remove(item);
+                showToastMessage("取消收藏成功");
+            } else {
+                CollectDataCache.save(item);
+                showToastMessage("加入收藏成功");
+            }
+            invalidateOptionsMenu();
         }
         return true;
     }

@@ -135,4 +135,5 @@ public class ArticleItem extends DbInfo implements Comparable<ArticleItem> {
         long a = DateUtil.stringToLong(another.date, formatType);
         return (int) (t - a);
     }
+
 }
